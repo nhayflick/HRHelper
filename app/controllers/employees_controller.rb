@@ -1,6 +1,7 @@
 class EmployeesController < ApplicationController
   def new
     @employee = Employee.new
+    @employee.build_employee_profile
   end
 
   def create
@@ -28,5 +29,6 @@ class EmployeesController < ApplicationController
 
   def show
     @employee = Employee.find(params[:id])
+    @employee_profile = @employee.employee_profile
   end
 end

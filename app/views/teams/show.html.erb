@@ -1,0 +1,16 @@
+<h1>Team record:</h1>
+
+<h4>Name:</h4>
+<%= @team.name %>
+<br>
+<h4>Members:</h4> 
+<ul>
+<% @team.members.each do |member|%>
+  <li><%= member.name %></li>
+<% end %>
+</ul>
+<br>
+<h4> Supervisor: </h4>
+<%= @team.supervisor.try(:name) || "None Assigned" %>
+<br><br>
+<%= link_to 'Edit record', edit_team_url %>

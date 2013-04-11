@@ -5,7 +5,7 @@
   Join teams:
   <% Team.all.each do |team| %>
     <%= team.name %>
-    <%= check_box_tag 'employee[team_ids][]', team.id %>
+    <%= check_box_tag 'employee[team_ids][]', team.id, employee.teams.find_by_id(team.id) %>
     <br>
   <% end %>
   Assign a supervisor:
@@ -13,7 +13,27 @@
     <% Employee.all.each do |sup| %>
       <option value='<%= sup.id %>'> <%= sup.name %> </option>
     <% end %>
-      <option value=''> None </option>
-    </select>
-  <%= f.submit %>
+  <option value=''> None </option>
+  </select>
+  <%= f.fields_for :employee_profile do |profile_fields| %>
+    <%= profile_fields.label :height, 'Height (inches)' %>
+    <%= profile_fields.select :height, (50..100).to_a %>
+    <br>
+    <%= profile_fields.label :age %>
+    <%= profile_fields.select :age, (18..100).to_a %>
+    <br>
+    <%= profile_fields.label :favorite_food %>
+    <%= profile_fields.text_field :favorite_food %>
+    <br>
+    <%= profile_fields.label :favorite_day %>
+    <%= profile_fields.select :favorite_day, Date::DAYNAMES %>
+    <br>
+    <%= profile_fields.label :date_of_birth %>
+    <%= profile_fields.date_select :date_of_birth, :start_year => 1900 %>
+    <br>
+    <%= profile_fields.label :salary %>
+    <%= profile_fields.text_field :salary %>
+    <br>
+  <% end %>
+<%= f.submit %>
 <% end %>

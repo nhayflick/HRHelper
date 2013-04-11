@@ -1,5 +1,5 @@
 class Team < ActiveRecord::Base
-  attr_accessible :name, :supervisor_id
+  attr_accessible :name, :supervisor_id, :member_ids
 
   has_many :memberships, :class_name => 'TeamMembership'
   has_many :members, :through => :memberships, :source => :employee

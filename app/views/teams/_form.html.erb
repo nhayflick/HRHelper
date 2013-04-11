@@ -1,0 +1,15 @@
+<%= form_for team do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <h4> Select Team Members: </h4>
+  <% Employee.all.each do |employee| %>
+    <p>
+    <%= employee.name %>
+    <%= check_box_tag 'team[member_ids][]', employee.id, team.members.find_by_id(employee.id) %>
+  <% end %>
+  <input type='hidden', name='team[member_ids][]', value='' %>
+  <p>
+  <%= f.collection_select :supervisor_id, Employee.all, :id, :name %>
+  <p>
+  <%= f.submit %>
+<% end %>
