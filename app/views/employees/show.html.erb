@@ -1,0 +1,13 @@
+<h1> View Employee </h1>
+<h4>Name:</h4>
+<%= @employee.name %>
+<br>
+<h4>Teams:</h4>
+<% @employee.teams.each do |team| %>
+  <%= team.name %>
+  <br>
+<% end %>
+<h4> Supervisor: </h4>
+<%= @employee.supervisor.try(:name) || "None Assigned" %>
+<br><br>
+<%= link_to 'Edit Employee Record', edit_employee_url%>

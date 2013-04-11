@@ -1,0 +1,19 @@
+<%= form_for employee do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+  Join teams:
+  <% Team.all.each do |team| %>
+    <%= team.name %>
+    <%= check_box_tag 'employee[team_ids][]', team.id %>
+    <br>
+  <% end %>
+  Assign a supervisor:
+  <select name='employee[supervisor_id]'>
+    <% Employee.all.each do |sup| %>
+      <option value='<%= sup.id %>'> <%= sup.name %> </option>
+    <% end %>
+      <option value=''> None </option>
+    </select>
+  <%= f.submit %>
+<% end %>
